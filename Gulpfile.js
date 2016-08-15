@@ -56,7 +56,7 @@ gulp.task('postcss', function() {
 
 gulp.task('watch', function () {
 
-  var server = livereload({ start: true });
+  server = livereload({ start: true });
 
   gulp.watch(['./react-app/src/**/*.js'], ['bundle']);
   gulp.watch(['./images/**/*'], ['images']);
