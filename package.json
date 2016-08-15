@@ -1,0 +1,35 @@
+{
+  "name": "expressjs-react-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for developing with an express backend and react frontend. Using gulp as a task runner.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielAlacchi/expressjs-react-boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielAlacchi/expressjs-react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/GabrielAlacchi/expressjs-react-boilerplate#readme",
+  "devDependencies": {
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  }
+}
