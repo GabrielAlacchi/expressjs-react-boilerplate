@@ -3,8 +3,12 @@ logs
 *.log
 npm-debug.log*
 
-# build folder for gulp and static file server
+# build folder for gulp output and static file server
 build/
+
+# Don't want to clutter the repo with images except the favicon.ico so the boilerplate works properly
+images/*
+!images/favicon.ico
 
 # Runtime data
 pids
