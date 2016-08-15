@@ -17,77 +17,80 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
 var babelify = require('babelify');
+var imagemin = require('gulp-imagemin');
+var postcss = require('gulp-postcss');
+var nested = require('postcss-nested');
+var scss = require('postcss-scss');
+var livereload = require('gulp-livereload');
 
-// External dependencies you do not want to rebundle while developing,
-// but include in your application deployment
-var dependencies = [
-  'react',
-  'react-dom'
-];
 // keep a count of the times a task refires
-var scriptsCount = 0;
-
-var isProduction = process.env.NODE_ENV !== 'production';
-
 // Gulp tasks
 // ----------------------------------------------------------------------------
 gulp.task('bundle', function () {
-  bundleApp();
+  return bundleApp();
+});
+
+gulp.task('html', function () {
+  return gulp.src('./react-app/*.html')
+    .pipe(gulp.dest('./build'))
+    .pipe(livereload());
+});
+
+gulp.task('images', function () {
+  return gulp.src('images/**/*')
+    .pipe(imagemin())
+    .on('error', gutil.log)
+    .pipe(gulp.dest('./build/img'))
+    .pipe(livereload());
+});
+
+//To use sass switch to using gulp-sass
+gulp.task('postcss', function() {
+  const processors = [nested];
+  return gulp.src('css/**/*.css')
+    .pipe(postcss(processors, {syntax: scss}))
+    .on('error', gutil.log)
+    .pipe(gulp.dest('./build/stylesheets'))
+    .pipe(livereload());
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./react-app/*.js'], ['scripts']);
+
+  var server = livereload({ start: true });
+
+  gulp.watch(['./react-app/src/**/*.js'], ['bundle']);
+  gulp.watch(['./images/**/*'], ['images']);
+  gulp.watch(['./css/**/*'], ['postcss']);
+  gulp.watch(['./react-app/*.html'], ['html']);
 });
 
-gulp.task('default', 'bundle');
+gulp.task('postinstall', ['bundle', 'html', 'images', 'postcss']);
 
 // When running 'gulp' on the terminal this task will fire.
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
-gulp.task('default', ['scripts','watch']);
+gulp.task('default', ['bundle', 'html', 'postcss', 'watch']);
 
 // Private Functions
 // ----------------------------------------------------------------------------
 function bundleApp() {
-  scriptsCount++;
+
   // Browserify will bundle all our js files together in to one and will let
   // us use modules in the front end.
   var appBundler = browserify({
-    entries: './react-app/react-app.js',
+    entries: './react-app/src/app.js',
     debug: true
   });
 
-  // If it's not for production, a separate vendors.js file will be created
-  // the first time gulp is run so that we don't have to rebundle things like
-  // react everytime there's a change in the js file
-  if (!isProduction && scriptsCount === 1){
-    // create vendors.js for dev environment.
-    browserify({
-      require: dependencies,
-      debug: true
-    })
-      .bundle()
-      .on('error', gutil.log)
-      .pipe(source('vendors.js'))
-      .pipe(gulp.dest('./build/js/'));
-  }
-  if (!isProduction){
-    // make the dependencies external so they dont get bundled by the
-    // react-app bundler. Dependencies are already bundled in vendor.js for
-    // development environments.
-    dependencies.forEach(function(dep){
-      appBundler.external(dep);
-    })
-  }
-
-  appBundler
+  return appBundler
   // transform ES6 and JSX to ES5 with babelify
     .transform("babelify", {
       presets: ["es2015", "react"],
       plugins: ["react-html-attrs", "transform-class-properties", "transform-decorators-legacy"]
     })
     .bundle()
-    .on('error',gutil.log)
+    .on('error', gutil.log)
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./build/js/'));
+    .pipe(gulp.dest('./build/src/'))
+    .pipe(livereload());
 }

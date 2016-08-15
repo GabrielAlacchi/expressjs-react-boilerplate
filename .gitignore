@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# build folder for gulp and static file server
+build/
+
 # Runtime data
 pids
 *.pid

@@ -4,7 +4,10 @@
   "description": "Boilerplate for developing with an express backend and react frontend. Using gulp as a task runner.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/www",
+    "postinstall": "gulp postinstall",
+    "dev": "concurrently \"gulp\" \"npm start\"",
+    "test": "gulp postinstall && npm start"
   },
   "repository": {
     "type": "git",
@@ -24,12 +27,23 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
+    "concurrently": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-livereload": "^3.8.1",
+    "gulp-postcss": "^6.1.1",
     "gulp-util": "^3.0.7",
+    "postcss-nested": "^1.0.0",
+    "postcss-scss": "^0.1.9",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-dom": "^15.3.0",
+    "serve-favicon": "^2.3.0"
   }
 }
