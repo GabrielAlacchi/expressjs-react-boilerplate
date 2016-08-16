@@ -5,7 +5,7 @@ Boilerplate for developing with an express backend and react frontend. Using gul
 # Setup
 
 <p>From the repository: </p>
-`Simply fork or clone this repository. Or alternatively download the zip.` <br>
+Simply fork or clone this repository. Or alternatively download the zip. <br>
 `npm install` in the root directory.
 <p>There are many dependencies required to transpile es2015 + jsx -> es5, as well as gulp packages so don't freak out if it takes a while</p>
 
