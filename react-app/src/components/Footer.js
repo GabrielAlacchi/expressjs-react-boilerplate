@@ -8,7 +8,7 @@ export default class Footer extends React.Component {
 
   render() {
     return (
-      <footer>Use it with respek fam.</footer>
+        <footer>Use it with respek fam.</footer>
     );
   }
 }

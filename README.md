@@ -1,7 +1,6 @@
-# expressjs-react-boilerplate
-Boilerplate for developing with an express backend and react frontend. Using gulp as a task runner.
-The structure of the Gulpfile is built from this article: http://jpsierens.com/tutorial-gulp-javascript-2015-react/
-respek goes out to the guy who wrote it.
+# Express React Boilerplate
+
+Boilerplate for developing with an express backend and react frontend. Using gulp as a task runner. Webpack to bundle, and BrowserSync
 
 # Setup
 
@@ -9,9 +8,6 @@ respek goes out to the guy who wrote it.
 `Simply fork or clone this repository. Or alternatively download the zip.` <br>
 `npm install` in the root directory.
 <p>There are many dependencies required to transpile es2015 + jsx -> es5, as well as gulp packages so don't freak out if it takes a while</p>
-
-# Live Reload
-To use the live reload with gulp you need the browser extension. For chrome it's available here for free https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en.
 
 # NPM Scripts
 `npm start` will start the express app. <br>
